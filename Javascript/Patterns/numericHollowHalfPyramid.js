@@ -10,7 +10,7 @@ function numericHollowHalfPyramid(n) {
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= i; j++) {
       let rightEdge = i;
-      if (j == 1 || j == edge2 || i === n) {
+      if (j == 1 || j == rightEdge || i === n) {
         str += j;
       } else {
         str += " ";
@@ -22,7 +22,7 @@ function numericHollowHalfPyramid(n) {
   console.log(str);
 }
 
-// numericHollowHalfPyramid(10);
+numericHollowHalfPyramid(10);
 
 // Reverse Pyramid Same as Above
 function numericHollowHalfPyramidReverse(n) {
@@ -41,4 +41,4 @@ function numericHollowHalfPyramidReverse(n) {
   console.log(str);
 }
 
-numericHollowHalfPyramidReverse(10);
+// numericHollowHalfPyramidReverse(10);
