@@ -4,19 +4,16 @@ class Solution {
     let rightPointer = n - 1;
     let leftPointer = 0;
     for (let i = 0; i < n; i++) {
-      if (arr[i] >= 0) {
-        this.swap(arr, i, leftPointer);
+      if (arr[leftPointer] >= 0) {
         leftPointer++;
+      } else if (arr[rightPointer] < 0) {
+        rightPointer--;
+      } else {
+        this.swap(arr, leftPointer, rightPointer);
       }
     }
 
-    // for (let j = n - 1; j >= 0; j--) {
-    //   if (arr[j] < 0) {
-    //     this.swap(arr, j, rightPointer);
-    //     rightPointer--;
-    //   }
-    // }
-    console.log({ arr });
+    console.log("arr", arr);
   }
 
   swap(arr, i, j) {
