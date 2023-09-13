@@ -41,4 +41,4 @@ function numericHollowHalfPyramidReverse(n) {
   console.log(str);
 }
 
-numericHollowHalfPyramidReverse(10);
+numericHollowHalfPyramidReverse(9);
