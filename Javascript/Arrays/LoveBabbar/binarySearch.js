@@ -148,7 +148,7 @@ const result = binarySearch.searchElement([2, 3, 4, 6, 7, 1, 6, 8, 9], 1);
 const resultMissingNum = binarySearch.findMissingElementInSortedArray([
   1, 2, 3, 4, 5, 6, 7,
 ]);
-// console.log("resultMissingNum", resultMissingNum);
+console.log("resultMissingNum", resultMissingNum);
 
 const resultMountedPeak = binarySearch.findPeakElementInMountedArray([
   10, 20, 30, 50, 60, 40, 30,
