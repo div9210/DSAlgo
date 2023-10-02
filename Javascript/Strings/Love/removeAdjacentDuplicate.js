@@ -1,3 +1,4 @@
+// Leetcode:
 var removeDuplicates = function (s) {
   let ansString = "";
   // loop over the string

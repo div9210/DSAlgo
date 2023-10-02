@@ -1,3 +1,6 @@
+// Leetcode Question: 2325
+// Runtime: 70 ms
+// Memory: 45.50 MB
 var decodeMessage = function (key, message) {
   let map = new Map();
   let startLetter = "a";
