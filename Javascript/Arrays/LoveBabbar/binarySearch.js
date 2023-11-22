@@ -1,4 +1,26 @@
 class BinarySearch {
+  exponentialSearchElement(arr, target) {
+    let lowerStep = 1;
+    while (lowerStep < arr.length && arr[lowerStep] <= target) {
+      lowerStep = lowerStep * 2;
+    }
+
+    let start = Math.floor(lowerStep / 2);
+    // let end = lowerStep - 1 < arr.length ? lowerStep - 1 : arr.length - 1;
+    let end = Math.min(lowerStep - 1, arr.length - 1);
+
+    while (start <= end) {
+      let mid = Math.floor(start + (end - start) / 2);
+      if (arr[mid] === target) return mid;
+      else if (arr[mid] > target) {
+        end = mid - 1;
+      } else {
+        start = mid + 1;
+      }
+    }
+
+    return -1;
+  }
   searchElement(arr, target, start, end) {
     // let start = arr[0];
     // let end = arr[arr.length - 1];
@@ -351,8 +373,8 @@ class BinarySearch {
 }
 
 const binarySearch = new BinarySearch();
-// const result = binarySearch.searchElement([2, 3, 4, 6, 7, 1, 6, 8, 9], 1);
-// console.log("result", result);
+const result = binarySearch.exponentialSearchElement([5], 5);
+console.log("result", result);
 
 // Testing the missing element answer
 // const resultMissingNum = binarySearch.findMissingElementInSortedArray([
@@ -364,30 +386,30 @@ const binarySearch = new BinarySearch();
 //   10, 20, 30, 50, 60, 40, 30,
 // ]);
 
-const pivot = binarySearch.search([16, 2, 4, 6, 8, 10, 11, 12, 13, 14, 15], 13);
-const squareRoot64 = binarySearch.findSquareRootUsingBinarySearch(66);
-const searchMatrixAns = binarySearch.searchMatrix(
-  [
-    [1, 3, 5, 7],
-    [10, 11, 16, 20],
-    [23, 30, 34, 60],
-  ],
-  16
-);
+// const pivot = binarySearch.search([16, 2, 4, 6, 8, 10, 11, 12, 13, 14, 15], 13);
+// const squareRoot64 = binarySearch.findSquareRootUsingBinarySearch(66);
+// const searchMatrixAns = binarySearch.searchMatrix(
+//   [
+//     [1, 3, 5, 7],
+//     [10, 11, 16, 20],
+//     [23, 30, 34, 60],
+//   ],
+//   16
+// );
 
-const divide = binarySearch.divideUsingBinarySearch(-2147483648, -1);
-const nearlySorted = binarySearch.binarySearchOnNearlySortedArray(
-  [20, 10, 30, 50, 40, 70, 60],
-  50
-);
+// const divide = binarySearch.divideUsingBinarySearch(-2147483648, -1);
+// const nearlySorted = binarySearch.binarySearchOnNearlySortedArray(
+//   [20, 10, 30, 50, 40, 70, 60],
+//   50
+// );
 
-const oddOcurring = binarySearch.findTheOddOccuringElement([1]);
+// const oddOcurring = binarySearch.findTheOddOccuringElement([1]);
 
-// console.log("resultMountedPeak", resultMountedPeak);
-// console.log("pivot", pivot);
-// console.log("squareRoot64", squareRoot64);
-// console.log("searchMatrixAns", searchMatrixAns);
-// console.log("nearlySorted", nearlySorted);
-console.log("oddOcurring", oddOcurring);
+// // console.log("resultMountedPeak", resultMountedPeak);
+// // console.log("pivot", pivot);
+// // console.log("squareRoot64", squareRoot64);
+// // console.log("searchMatrixAns", searchMatrixAns);
+// // console.log("nearlySorted", nearlySorted);
+// console.log("oddOcurring", oddOcurring);
 
-// console.log("divide", divide);
+// // console.log("divide", divide);
