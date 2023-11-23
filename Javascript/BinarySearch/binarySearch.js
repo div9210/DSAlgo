@@ -176,9 +176,7 @@ class BinarySearch {
       } else if (arr[mid] < arr[mid - 1]) {
         return mid - 1;
       } else if (arr[mid] < arr[0]) {
-        // Now either you are in Line A or Line B and have not reached pivot
-        // Thus need to check on which line you are right now
-        // Checking line B
+        // line B
         end = mid - 1;
       } else {
         // line A
