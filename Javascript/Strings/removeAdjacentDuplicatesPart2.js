@@ -1,5 +1,5 @@
 // 1209. Remove All Adjacent Duplicates in String II
-
+// Time limit exceeded
 var removeDuplicates = function (s, k) {
   let ansString = "";
   for (let i = 0; i < s.length; i++) {

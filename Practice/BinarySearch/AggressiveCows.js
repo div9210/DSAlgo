@@ -1,3 +1,5 @@
+// https://practice.geeksforgeeks.org/problems/aggressive-cows/0
+
 class Solution {
   //Function to solve the problem.
   solve(n, k, stalls) {

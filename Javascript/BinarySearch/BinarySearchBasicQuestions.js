@@ -221,7 +221,21 @@ class BinarySearch {
       }
     }
 
-    return ans;
+    // Find the precision square root
+    let precision = 5;
+    // It means upto 5 decimal places
+    let step = 0.1; // one decimal place
+    for (let i = 0; i < precision; i++) {
+      let j = ans;
+      while (j * j <= number) {
+        ans = j;
+        j += step;
+      }
+
+      step = step / 10;
+    }
+
+    return Number(ans.toFixed(precision));
   }
 
   searchMatrix(matrix, target) {
@@ -371,7 +385,8 @@ class BinarySearch {
 }
 
 const binarySearch = new BinarySearch();
-const result = binarySearch.exponentialSearchElement([5], 5);
+// const result = binarySearch.exponentialSearchElement([5], 5);
+const result = binarySearch.findSquareRootUsingBinarySearch(51);
 console.log("result", result);
 
 // Testing the missing element answer
