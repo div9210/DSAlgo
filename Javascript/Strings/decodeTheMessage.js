@@ -7,11 +7,8 @@ var decodeMessage = function (key, message) {
   for (let i = 0; i < key.length; i++) {
     if (!map.has(key[i]) && key[i] != " ") {
       map.set(key[i], startLetter);
-      if (startLetter === "z") {
-        startLetter === "a";
-      } else {
-        startLetter = String.fromCharCode(startLetter.charCodeAt(0) + 1);
-      }
+
+      startLetter = String.fromCharCode(startLetter.charCodeAt(0) + 1);
     }
   }
 
