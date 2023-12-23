@@ -34,16 +34,18 @@ var numberOfBeamsPart2 = function (bank) {
   let totalBeams = 0;
   for (let i = 0; i < devicesArray.length - 1; i++) {
     let upcoming = i + 1;
-    while (devicesArray[upcoming] === 0) {
+    while (devicesArray[upcoming] === 0 && upcoming < devicesArray.length) {
       upcoming++;
     }
 
-    totalBeams += devicesArray[i] * (devicesArray[upcoming] || 0);
+    if (upcoming !== devicesArray.length) {
+      totalBeams += devicesArray[i] * devicesArray[upcoming];
+    }
   }
 
   return totalBeams;
 };
-let bank = ["000", "111", "000"];
+let bank = ["010", "111", "000"];
 const result = numberOfBeamsPart2(bank);
 console.log({
   result,
