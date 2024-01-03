@@ -1,0 +1,1 @@
+function mincostTickets(days, costs) {}

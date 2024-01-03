@@ -21,8 +21,8 @@ function findMissingWithDuplicates(nums) {
     }
   }
 
-  return { result, nums };
+  return result;
 }
 
-const result = findMissingWithDuplicates([1, 3, 5, 3, 4]);
+const result = findMissingWithDuplicates([1, 2, 2, 5, 3]);
 console.log("result", result);

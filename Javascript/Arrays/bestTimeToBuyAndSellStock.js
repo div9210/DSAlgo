@@ -3,14 +3,18 @@ var maxProfit = function (prices) {
   let maxProfit = 0;
 
   for (let i = 0; i < prices.length; i++) {
-    minimumPrice = minimumPrice < prices[i] ? minimumPrice : prices[i];
-    maxProfit =
-      maxProfit > prices[i] - minimumPrice // prices[i] - minimumPrice is currentProfit
-        ? maxProfit
-        : prices[i] - minimumPrice;
+    if (prices[i] < minimumPrice) {
+      minimumPrice = prices[i];
+    }
+
+    let currentProfit = prices[i] - minimumPrice;
+    if (currentProfit > maxProfit) {
+      maxProfit = currentProfit;
+    }
   }
 
   return maxProfit;
 };
 
-const prices = [10, 7, 5, 8, 11, 9];
+const prices = [100, 90, 80, 70, 60];
+console.log(maxProfit(prices));

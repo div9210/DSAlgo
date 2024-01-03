@@ -1,5 +1,5 @@
-function merge(arr, start, end) {
-  let mid = Math.floor(start + (end - start) / 2);
+function merge(arr, start, end, mid) {
+  // let mid = Math.floor(start + (end - start) / 2);
   let leftArray = arr.slice(start, mid + 1); // start --> mid
   let rightArray = arr.slice(mid + 1, end + 1); // mid + 1 --> end
 
@@ -67,7 +67,7 @@ function mergeSort(arr, start, end) {
   mergeSort(arr, mid + 1, end);
 
   // Merge the two sorted subarrays
-  merge(arr, start, end);
+  merge(arr, start, end, mid);
 }
 
 let arr = [2, 1, 4, 8, 9, 3, 5, 6];
