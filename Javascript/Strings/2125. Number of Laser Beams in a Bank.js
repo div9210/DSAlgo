@@ -4,7 +4,7 @@ var numberOfBeams = function (bank) {
     let upcomingRow = i + 1;
     // check number of security devices present in the upcoming row
     let numDevicesInUpcomingRow = 0;
-    while (numDevicesInUpcomingRow === 0) {
+    while (numDevicesInUpcomingRow === 0 && upcomingRow < bank.length) {
       numDevicesInUpcomingRow = calculateDevices(bank[upcomingRow]);
       upcomingRow++;
     }

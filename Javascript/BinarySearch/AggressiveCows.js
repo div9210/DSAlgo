@@ -23,17 +23,17 @@ class Solution {
     return ans;
   }
 
-  isPossibleSolution(stalls, n, k, mid) {
+  isPossibleSolution(stalls, n, numCows, minDistance) {
     let positionOfCow = stalls[0];
     let currentCow = 1;
     for (let i = 1; i < n; i++) {
-      if (stalls[i] - positionOfCow >= mid) {
+      if (stalls[i] - positionOfCow >= minDistance) {
         // Place the cow and move to the next cow
         currentCow++;
         positionOfCow = stalls[i];
       }
 
-      if (currentCow == k) return true;
+      if (currentCow == numCows) return true;
     }
 
     return false;
