@@ -11,6 +11,15 @@ class LinkedList {
     this.length = 0;
   }
 
+  intersect(node) {
+    this.tail.next = node;
+    this.tail = node;
+  }
+
+  getTail() {
+    return this.tail;
+  }
+
   printHeadAndTail() {
     if (this.head == null || this.tail == null) {
       console.log("Head of the LL ->", null);
@@ -194,6 +203,10 @@ class LinkedList {
       this.length--;
     }
   }
+
+  getHead() {
+    return this.head;
+  }
 }
 
 let newLL = new LinkedList();
@@ -226,3 +239,8 @@ console.log("After newLL.deleteAtPosition(3)");
 newLL.deleteAtPosition(100);
 newLL.deleteTail();
 newLL.print();
+
+module.exports = {
+  newLL,
+  LinkedList,
+};

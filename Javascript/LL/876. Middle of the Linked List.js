@@ -1,21 +1,21 @@
-var middleNode = function (head) {
-  // Find length of the linked list
-  let currentNode = head;
-  let length = 0;
-  while (currentNode != null) {
-    length++;
-  }
+// var middleNode = function (head) {
+//   // Find length of the linked list
+//   let currentNode = head;
+//   let length = 0;
+//   while (currentNode != null) {
+//     length++;
+//   }
 
-  let mid = Math.floor(n / 2) + 1;
-  currentNode = head;
-  let reachedPosition = 1;
-  while (reachedPosition != mid) {
-    currentNode = currentNode.next;
-    reachedPosition++;
-  }
+//   let mid = Math.floor(n / 2) + 1;
+//   currentNode = head;
+//   let reachedPosition = 1;
+//   while (reachedPosition != mid) {
+//     currentNode = currentNode.next;
+//     reachedPosition++;
+//   }
 
-  return currentNode;
-};
+//   return currentNode;
+// };
 
 var middleNode = function (head) {
   // Solving it by rabbit tortoise algorithm
@@ -29,9 +29,14 @@ var middleNode = function (head) {
 
   // If code reaches here that means rabbit cannnot move 2 steps
   // As there are not enough steps
-  if (rabbit?.next) {
-    return tortoise.next;
-  } else {
-    return tortoise;
-  }
+  // if (rabbit?.next) {
+  //   return tortoise.next;
+  // } else {
+  //   return tortoise;
+  // }
+
+  return tortoise;
+};
+module.exports = {
+  middleNode,
 };

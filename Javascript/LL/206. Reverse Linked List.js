@@ -82,8 +82,8 @@ class LinkedList {
         prevNode = currentNode;
         currentNode = nextNode;
         // Update the nextNode if currentNode is not null
-        if (currentNode != null) {
-          nextNode = currentNode.next;
+        if (nextNode != null) {
+          nextNode = nextNode.next;
         }
       }
       this.head = prevNode;
