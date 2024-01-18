@@ -28,7 +28,6 @@ class StockSpanner {
   }
   next(val) {
     this.index++;
-    let peek = this.stack.peek();
     while (!this.stack.isEmpty() && this.stack.peek().val <= val) {
       this.stack.pop();
     }
