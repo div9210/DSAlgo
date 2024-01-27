@@ -26,5 +26,3 @@ function firstNonRepeatingAtTime(s) {
 }
 
 console.log(firstNonRepeatingAtTime("yewaahkpuo"));
-
-// Very Important Question
