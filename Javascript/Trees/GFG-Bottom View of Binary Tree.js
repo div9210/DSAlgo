@@ -36,6 +36,7 @@ class Solution {
     // Extract values from the sorted entries
     let sortedValues = sortedEntries.map((entry) => entry[1]);
 
+    // Note : Map sort the values based on keys already
     return sortedValues;
   }
 }

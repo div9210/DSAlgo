@@ -19,3 +19,26 @@ function isBalanced(root) {
   }
   return false;
 }
+
+// Faster Way
+function heightRecursion(root, result) {
+  if (root == null) return 0;
+
+  let lh = heightRecursion(root.left, result);
+  let rh = heightRecursion(root.right, result);
+
+  // Extra piece of code in height function
+  let diff = Math.abs(lh - rh);
+  if (diff > 1) {
+    result.balanced = false;
+  }
+  ///////////////////////////////////////////
+
+  return Math.max(lh, rh) + 1;
+}
+
+function isBalanced(root) {
+  let result = { balanced: true };
+  heightRecursion(root, result);
+  return result.balanced;
+}
