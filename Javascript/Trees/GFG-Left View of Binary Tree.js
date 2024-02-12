@@ -11,6 +11,10 @@ class Solution {
       leftView.push(root.value);
     }
 
+    // Since by going left or right
+    // We are going one level down in a tree
+    // So in both left and right traversal we will pass level + 1
+
     // Left SubTree
     this.solve(root.left, level + 1, leftView);
 

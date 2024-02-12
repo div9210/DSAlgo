@@ -22,26 +22,23 @@ class BinaryTree {
       this.root = newNode;
       console.log(`Inserted ${value} as the root`);
     } else {
-      this._insertNode(this.root, newNode);
-    }
-  }
-
-  _insertNode(node, newNode) {
-    if (newNode.value < node.value) {
-      if (!node.left) {
-        node.left = newNode;
-        console.log(`Inserted ${newNode.value} as left child of ${node.value}`);
-      } else {
-        this._insertNode(node.left, newNode);
-      }
-    } else {
-      if (!node.right) {
-        node.right = newNode;
-        console.log(
-          `Inserted ${newNode.value} as right child of ${node.value}`
-        );
-      } else {
-        this._insertNode(node.right, newNode);
+      let current = this.root;
+      while (current) {
+        if (value < current.value) {
+          if (!current.left) {
+            current.left = newNode;
+            console.log(`Inserted ${value} as left child of ${current.value}`);
+            break;
+          }
+          current = current.left;
+        } else {
+          if (!current.right) {
+            current.right = newNode;
+            console.log(`Inserted ${value} as right child of ${current.value}`);
+            break;
+          }
+          current = current.right;
+        }
       }
     }
   }
