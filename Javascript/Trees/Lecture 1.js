@@ -119,4 +119,5 @@ class BinaryTree {
 
 module.exports = {
   BinaryTree,
+  Node,
 };
