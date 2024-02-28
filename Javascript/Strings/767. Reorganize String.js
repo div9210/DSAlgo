@@ -24,7 +24,7 @@ var reorganizeString = function (str) {
   }
 
   // If all were not placed
-  if (index >= s.length) {
+  if (frequency != 0) {
     return "";
   }
 
@@ -43,4 +43,4 @@ var reorganizeString = function (str) {
   return s.join("");
 };
 
-console.log(reorganizeString("bbbbbbb"));
+console.log(reorganizeString("aab"));

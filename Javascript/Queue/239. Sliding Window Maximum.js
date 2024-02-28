@@ -1,7 +1,7 @@
 const { Deque } = require("./dequeue");
 
 var maxSlidingWindow = function (nums, k) {
-  let q = new Deque();
+  let maxq = new Deque();
   // Process first k elements
   for (let i = 0; i < k; i++) {
     // Remove all the smaller elements from q
