@@ -1,4 +1,4 @@
-const { BinaryTree } = require("./Lecture 1");
+const { BinaryTree } = require("../Lecture 1");
 
 class Solution {
   constructor() {

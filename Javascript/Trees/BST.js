@@ -54,7 +54,7 @@ class BST {
         let maxNode = this.findMax(root.left);
         if (maxNode) {
           root.value = maxNode.value;
-          // Delete the maxNode
+          // Delete the maxNode now
           root.left = this.deleteNode(root.left, maxNode.value);
         }
       }

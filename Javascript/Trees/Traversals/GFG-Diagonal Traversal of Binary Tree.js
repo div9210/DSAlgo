@@ -1,4 +1,4 @@
-const { BinaryTree } = require("./Lecture 1");
+const { BinaryTree } = require("../Lecture 1");
 // This solution is correct but TLE
 class Solution {
   solve(root, level, result) {

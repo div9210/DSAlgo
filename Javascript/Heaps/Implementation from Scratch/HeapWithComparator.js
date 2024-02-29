@@ -48,12 +48,12 @@ class HeapWithComparator {
     this.elements.pop();
 
     // Heapify Down (Parent to Child)
-    let currrentIndex = 0;
+    let currentIndex = 0;
     let n = this.elements.length;
-    while (currrentIndex < n) {
-      let leftChildIndex = 2 * currrentIndex + 1;
-      let rightChildIndex = 2 * currrentIndex + 2;
-      let smallestIndex = currrentIndex;
+    while (currentIndex < n) {
+      let leftChildIndex = 2 * currentIndex + 1;
+      let rightChildIndex = 2 * currentIndex + 2;
+      let smallestIndex = currentIndex;
 
       // If the comparatorFn for smallestIndex and leftChildIndex elements returns anything less than 0
       // Then it is right but for the case of opposite i.e more than 0 we need to update smallestIndex
@@ -79,10 +79,10 @@ class HeapWithComparator {
         smallestIndex = rightChildIndex;
       }
 
-      if (smallestIndex != currrentIndex) {
+      if (smallestIndex != currentIndex) {
         // Swap
-        this.swap(this.elements, smallestIndex, currrentIndex);
-        currrentIndex = smallestIndex;
+        this.swap(this.elements, smallestIndex, currentIndex);
+        currentIndex = smallestIndex;
       } else {
         break;
       }

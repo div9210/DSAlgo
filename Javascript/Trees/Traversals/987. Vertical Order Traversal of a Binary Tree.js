@@ -1,4 +1,4 @@
-const { BinaryTree } = require("./Lecture 1");
+const { BinaryTree } = require("../Lecture 1");
 
 function solve(root, result, level, row) {
   if (root == null) return;
