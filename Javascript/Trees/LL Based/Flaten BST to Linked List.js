@@ -1,4 +1,4 @@
-const { BinaryTree, Node } = require("./Lecture 1");
+const { BinaryTree, Node } = require("../Lecture 1");
 
 // Alternate way
 function inorderT(root, preorder, prev) {

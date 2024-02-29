@@ -3,6 +3,9 @@ class HeapWithComparator {
     this.elements = [];
     this.comparatorFn = cFn;
   }
+  size() {
+    return this.elements.length;
+  }
   swap(arr, i, j) {
     let temp = arr[i];
     arr[i] = arr[j];
@@ -94,6 +97,10 @@ class HeapWithComparator {
   print() {
     console.log("Heap :", this.elements);
   }
+
+  peek() {
+    return this.elements[0];
+  }
 }
 
 let minH = new HeapWithComparator((a, b) => a.data - b.data);
@@ -105,3 +112,7 @@ minH.insert({ data: 3 });
 minH.print();
 minH.delete();
 minH.print();
+
+module.exports = {
+  HeapWithComparator,
+};
