@@ -38,11 +38,12 @@ class HeapWithComparator {
   }
 
   delete() {
-    let root = this.elements[0];
-    if (!root) {
+    if (this.elements.length == 0) {
       console.log("Underflow");
-      return;
+      return null;
     }
+
+    let root = this.elements[0];
 
     // Now pick the safest node in the heap i.e rightMost
     let safestNode = this.elements[this.elements.length - 1];

@@ -14,7 +14,7 @@ class MedianFinder {
     let midElement2 = minH.peek();
     return (midElement1 + midElement2) / 2;
   }
-  solveForMedian(maxH, minH, element) {
+  updateMedian(maxH, minH, element) {
     // maxH (left to Median)
     // minH (right to Median)
     if (maxH.size() == minH.size()) {

@@ -157,16 +157,16 @@ class BST {
 }
 
 // Example usage:
-const bst = new BST();
-let root = bst.getRoot();
-bst.insert(5);
-bst.insert(3);
-bst.insert(7);
-bst.insert(1);
-bst.insert(4);
-bst.insert(6);
-bst.insert(8);
-bst.insert(9);
+// const bst = new BST();
+// let root = bst.getRoot();
+// bst.insert(5);
+// bst.insert(3);
+// bst.insert(7);
+// bst.insert(1);
+// bst.insert(4);
+// bst.insert(6);
+// bst.insert(8);
+// bst.insert(9);
 
 // console.log(bst.levelOrderTraversal(bst.getRoot()));
 // console.log("Node Present:", bst.nodePresent(bst.getRoot(), 7));
@@ -175,6 +175,10 @@ bst.insert(9);
 // console.log("After Deletion");
 // console.log(bst.levelOrderTraversal(bst.getRoot()));
 
-let resultBST = bst.constructBSTFromInorder([10, 20, 30, 40, 50, 60, 70], 0, 6);
-console.log(resultBST);
-console.log(bst.levelOrderTraversal(resultBST));
+// let resultBST = bst.constructBSTFromInorder([10, 20, 30, 40, 50, 60, 70], 0, 6);
+// console.log(resultBST);
+// console.log(bst.levelOrderTraversal(resultBST));
+
+module.exports = {
+  BST,
+};
