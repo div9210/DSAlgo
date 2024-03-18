@@ -88,6 +88,8 @@ class BST {
 
   insertAfter(root, val) {
     if (root === null) {
+      // If by going left or right you reach a null
+      // That means this is the place for your new node
       let newNode = new TreeNode(val);
       return newNode;
     }

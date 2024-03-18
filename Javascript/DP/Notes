@@ -1,0 +1,17 @@
+Dynamic Programming : Letcure 1
+
+There are two types of basic dynamic Programming
+1. Top - Down Approach
+    Also Known as Recursion + Memoization Approach
+    Follow the steps
+    a. Create a DP Array of size n + 1
+    b. Store the ans and return the ans from dp array rather than returning directly or storing in a variable
+    c. Before returning check if the ans already exists in the dp array, if yes directly return from there
+
+2. Bottom - Up Approach
+    Also knows as Tablulation Method Approach
+    Go to the base case or the start or Bottom
+    and build the array from there.
+    a. Create a dp array
+    b. Fill the initial data or fill base cases data
+    c. Fill the rest of the array using logic or recusive solution

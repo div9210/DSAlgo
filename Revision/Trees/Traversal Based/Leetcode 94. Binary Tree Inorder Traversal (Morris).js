@@ -39,8 +39,9 @@ var inorderTraversal = function (root) {
       if (predecessor.right == currentNode) {
         // This means we have visited through this node already and created a bridge and crossed using that bridge
         // And now we are back
-        // So destroy the bridge now
+        // So destroy the bridge now, currentNode is already at the right position
         predecessor.right = null;
+        // Since we are done now with the left of currentNode remaining operations are N and R
         // visit the currentNode (N)
         ans.push(currentNode.val);
         // Move right (R)

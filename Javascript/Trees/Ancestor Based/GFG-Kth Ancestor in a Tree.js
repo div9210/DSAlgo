@@ -1,11 +1,16 @@
 const { BinaryTree } = require("../Lecture 1");
 class Solution {
   solve(root, node, res) {
+    // Base Case
     if (root == null) return null;
+    // If found
     if (root.data == node) return root;
+
+    // If previously we have set an answer, there is no need
+    // to set it again and there is no need to traverse it further
     if (res.ans != -1) {
       // We have already set the ans
-      // return whatever
+      // return whatever since we are setting the ans in res
       return null;
     }
 
@@ -28,7 +33,6 @@ class Solution {
   kthAncestor(root, k, node) {
     let res = { k, ans: -1 };
     this.solve(root, node, res);
-    // console.log(res);
     return res.ans;
   }
 }
