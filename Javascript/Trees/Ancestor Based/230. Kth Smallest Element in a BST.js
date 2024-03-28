@@ -1,18 +1,20 @@
 const { BST } = require("../BST");
 
-function solve(root, k, ans) {
-  if (!root) return;
-
-  // LNR
-  if (ans.length != k) solve(root.left, k, ans);
-  if (ans.length != k) ans.push(root.val);
-  if (ans.length != k) solve(root.right, k, ans);
-}
-
 var kthSmallest = function (root, k) {
   let ans = [];
-  solve(root, k, ans);
+  solve(root, k);
   return ans[k - 1];
+
+  function solve(root, k) {
+    if (!root) return;
+
+    // LNR
+    if (ans.length != k) {
+      solve(root.left, k);
+      ans.push(root.val);
+      solve(root.right, k);
+    }
+  }
 };
 
 // Same logic written in a different coding style by ChatGPT
@@ -21,7 +23,10 @@ var kthSmallest = function (root, k) {
   let count = 0;
   let result = null;
 
-  const inorderTraversal = function (node) {
+  inorderTraversal(root);
+  return result;
+
+  function inorderTraversal(node) {
     if (node === null) return;
     inorderTraversal(node.left);
     count++;
@@ -30,10 +35,7 @@ var kthSmallest = function (root, k) {
       return;
     }
     inorderTraversal(node.right);
-  };
-
-  inorderTraversal(root);
-  return result;
+  }
 };
 
 let Tree = new BST();

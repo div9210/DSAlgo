@@ -24,6 +24,7 @@ var lowestCommonAncestor = function (root, p, q) {
   } else if (!leftSearch && rightSearch) {
     return rightSearch;
   } else {
+    // If left and right both returns not null, then our root is the common ancestor
     return root;
   }
 };

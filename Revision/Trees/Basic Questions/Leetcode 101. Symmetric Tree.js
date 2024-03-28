@@ -5,7 +5,9 @@ function checkSymmetry(p, q) {
 
   if (p && q) {
     return (
-      p.val == q.val && symmetric(p.left, q.right) && symmetric(p.right, q.left)
+      p.val == q.val &&
+      checkSymmetry(p.left, q.right) &&
+      checkSymmetry(p.right, q.left)
     );
   }
 
