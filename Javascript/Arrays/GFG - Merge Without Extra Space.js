@@ -1,20 +1,5 @@
 class Solution {
-  //Function to merge the arrays.
-  merge(arr1, arr2, n, m) {
-    // loop over arr1 and check the arr1[i] with first element of the arr2;
-    // if arr2[0] < arr1[i]; swap the two elements;
-    // sort the arr2
-    for (let i = 0; i < n; i++) {
-      if (arr1[i] > arr2[0]) {
-        // Swapping
-        const temp = arr1[i];
-        arr1[i] = arr2[0];
-        arr2[0] = temp;
-      }
-      arr2 = arr2.sort((a, b) => a - b);
-    }
-  }
-
+  //Function to merge the arrays
   swapIfGreater(arr1, arr2, p1, p2) {
     if (arr2[p2] < arr1[p1]) {
       // Swap these two elements
