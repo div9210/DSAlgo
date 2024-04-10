@@ -1,32 +1,25 @@
 class Solution {
   // Function to detect cycle in an undirected graph.
-  solve(src, visited, adj) {
-    let q = [];
-    let parent = {};
-
-    // Initial state
-    q.push(src);
+  solve(src, visited, adj, parent) {
+    // Mark src node as visited
     visited[src] = true;
-    parent[src] = -1;
-
-    while (q.length > 0) {
-      let frontNode = q.shift();
-
-      for (let nbr of adj[frontNode]) {
-        if (nbr === parent[frontNode]) {
-          continue;
-        }
-        if (!visited[nbr]) {
-          q.push(nbr);
-          visited[nbr] = true;
-          parent[nbr] = frontNode;
-        } else if (visited[nbr] === true && parent[frontNode] !== nbr) {
-          // Cycle present
-          return true;
-        }
+    // Loop over the neighbours of src
+    for (let n of adj[src]) {
+      // If n is neighbour but also the parent of src
+      if (n == parent) {
+        // I don't want to check anything in this case
+        continue;
+      }
+      if (!visited[n]) {
+        // Check from this neighbour recursively
+        let furtherAns = this.solve(n, visited, adj, src);
+        if (furtherAns) return true;
+      } else if (visited[n] == true && n != parent) {
+        // Cycle present
+        return true;
       }
     }
-    // Cycle not present
+
     return false;
   }
 
@@ -34,7 +27,9 @@ class Solution {
     let visited = {};
     for (let i = 0; i < V; i++) {
       if (!visited[i]) {
-        let ans = this.solve(i, visited, adj);
+        // First parent for every node is always going to be -1
+        let parent = -1;
+        let ans = this.solve(i, visited, adj, parent);
         if (ans === true) {
           return true;
         }
@@ -43,7 +38,3 @@ class Solution {
     return false;
   }
 }
-
-const sol = new Solution();
-// console.log(sol.isCycle(5, [[1], [0, 2, 4], [1, 3], [2, 4], [1, 3]]));
-console.log(sol.isCycle(4, [[], [1, 2], [2, 3], []]));

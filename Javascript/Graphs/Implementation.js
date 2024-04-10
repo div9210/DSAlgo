@@ -3,69 +3,6 @@
 // 2. Using Adjacency List
 
 // Graph Implementation - Using Adjacency List
-// class Graph {
-//   constructor() {
-//     this.edgeMap = new Map();
-//   }
-
-//   addEdges(u, v, direction) {
-//     // Direction 1 -> one way u -> v or v -> u
-//     // Direction 0 -> two way u - v or v - u (without arrows)
-//     if (direction == 1) {
-//       // Add one way edge in edgeMap u -> v\
-//       if (this.edgeMap.has(u)) {
-//         let newEdgeList = this.edgeMap.get(u);
-//         newEdgeList.push(v);
-//         this.edgeMap.set(u, newEdgeList);
-//       } else {
-//         // First time
-//         this.edgeMap.set(u, [v]);
-//       }
-//     } else {
-//       // Add two way edge in edgeMap u - v and v - u
-//       // u - v
-//       if (this.edgeMap.has(u)) {
-//         let newEdgeList = this.edgeMap.get(u);
-//         newEdgeList.push(v);
-//         this.edgeMap.set(u, newEdgeList);
-//       } else {
-//         // First time
-//         this.edgeMap.set(u, [v]);
-//       }
-
-//       // v - u
-//       if (this.edgeMap.has(v)) {
-//         let newEdgeList = this.edgeMap.get(v);
-//         newEdgeList.push(u);
-//         this.edgeMap.set(v, newEdgeList);
-//       } else {
-//         // First time
-//         this.edgeMap.set(v, [u]);
-//       }
-//     }
-//   }
-
-//   print() {
-//     let printableOutput = "";
-//     for (let [key, value] of this.edgeMap) {
-//       printableOutput += `For element ${key}\nNeighbours :`;
-//       for (let e of value) {
-//         printableOutput += " | " + e + " | ";
-//       }
-//       printableOutput += "\n\n";
-//     }
-
-//     console.log(printableOutput);
-//   }
-// }
-
-// let graph = new Graph();
-// graph.addEdges(1, 2, 1);
-// graph.addEdges(1, 3, 0);
-// graph.addEdges(1, 4, 1);
-// graph.addEdges(2, 3, 1);
-// graph.addEdges(3, 4, 1);
-// graph.print();
 
 class Graph {
   constructor() {
