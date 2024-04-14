@@ -57,8 +57,8 @@ class Graph {
       stack.push(src);
     }
   }
-
-  shortestPaths(topo, n) {
+  // Shortest path from source using "Topological Ordering"
+  shortestPathsFromSource(topo, n) {
     let distance = Array(n).fill(Number.MAX_SAFE_INTEGER);
 
     // Initial State
@@ -94,17 +94,25 @@ class Graph {
   }
 }
 
-let g = new Graph();
-g.addEdge(0, 1, 1, 5);
-g.addEdge(0, 2, 1, 3);
-g.addEdge(1, 3, 1, 3);
-g.addEdge(2, 1, 1, 2);
-g.addEdge(2, 3, 1, 5);
-g.addEdge(2, 4, 1, 6);
-g.addEdge(4, 3, 1, 1);
+// let g = new Graph();
+// g.addEdge(0, 1, 1, 5);
+// g.addEdge(0, 2, 1, 3);
+// g.addEdge(1, 3, 1, 3);
+// g.addEdge(2, 1, 1, 2);
+// g.addEdge(2, 3, 1, 5);
+// g.addEdge(2, 4, 1, 6);
+// g.addEdge(4, 3, 1, 1);
 
-let topo = g.topoLogicalSort();
-let n = 5;
+// let topo = g.topoLogicalSort();
+// let n = 5;
 
-let distance = g.shortestPaths(topo, n);
-console.log("distance", distance);
+// let distance = g.shortestPaths(topo, n);
+// console.log("distance", distance);
+
+let set = new Set();
+set.add(4);
+set.add(3);
+set.add(2);
+set.add(2);
+set.add(5);
+console.log("set", [...set.values()]);
