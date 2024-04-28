@@ -1,12 +1,7 @@
-/**
- * @param {number} n
- * @param {number[][]} connections
- * @return {number}
- */
 var makeConnected = function (n, connections) {
-  let indegreeMap = {}; // Unordered Map
   let visited = new Array(n).fill(false);
   let adjList = {};
+
   // Fill the adjList
   for (let conn of connections) {
     let u = conn[0];
@@ -21,7 +16,7 @@ var makeConnected = function (n, connections) {
   }
 
   // Apply dfs to all components of graph
-  let disconnectedComponents = -1;
+  let disconnectedComponents = 0;
   for (let src = 0; src < n; src++) {
     if (!visited[src]) {
       dfs(src);
@@ -29,10 +24,15 @@ var makeConnected = function (n, connections) {
     }
   }
 
-  return disconnectedComponents;
-  while (disconnectedComponents) {
-    // Find in graph something that has indegree more than 1
-  }
+  // Check if it's possible to connect all components
+  // We need minimum 1 edge to connect 2 nodes
+  // 2 edges to connect 3 nodes
+  // thus n - 1 edges to connect n nodes (minimum)
+  // Checking if we have that
+  if (connections.length < n - 1) return -1; // Not enough connections to connect all nodes
+
+  let cablesNeeded = disconnectedComponents - 1;
+  return cablesNeeded;
 
   function dfs(src) {
     // Mark src as visited
@@ -44,18 +44,7 @@ var makeConnected = function (n, connections) {
         if (!visited[nbr]) {
           dfs(nbr);
         }
-        if (!indegreeMap[nbr]) indegreeMap[nbr] = 0;
-        indegreeMap[nbr]++;
       }
     }
   }
 };
-
-let n = 4,
-  connections = [
-    [0, 1],
-    [0, 2],
-    [1, 2],
-  ];
-
-console.log(makeConnected(n, connections));

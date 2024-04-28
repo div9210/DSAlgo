@@ -1,26 +1,27 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 var findDuplicate = function (nums) {
-  let set = new Set();
-  for (let i = 0; i < nums.length; i++) {
-    if (set.has(nums[i])) {
-      return nums[i];
-    } else {
-      set.add(nums[i]);
-    }
-  }
-};
+  // Let's use Floyd Cycle Detection Algorithm here
+  let tortoise = nums[0];
+  let rabbit = nums[0];
 
-var findDuplicate = function (nums) {
-  let slow = nums[0];
-  let fast = nums[0];
-  do {
-    slow = nums[slow];
-    fast = nums[nums[fast]];
-  } while (slow != fast);
+  // Take initial movements
+  tortoise = nums[tortoise];
+  rabbit = nums[nums[rabbit]];
 
-  fast = nums[0];
-  while (slow != fast) {
-    slow = nums[slow];
-    fast = nums[fast];
+  // Continue their movements till they meet for the first time
+  while (rabbit != tortoise) {
+    tortoise = nums[tortoise];
+    rabbit = nums[nums[rabbit]];
   }
-  return fast;
+
+  // After they meet, reset rabbit, and race at same pace till they meet again
+  rabbit = nums[0]; // Reset
+  while (rabbit != tortoise) {
+    tortoise = nums[tortoise];
+    rabbit = nums[rabbit];
+  }
+  return rabbit;
 };
