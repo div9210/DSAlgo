@@ -8,14 +8,14 @@ var eventualSafeNodes = function (graph) {
 
   let safeNodes = [];
   for (let u = 0; u < graph.length; u++) {
-    let isCycle = dfsCycle(src, visited, callStack, graph);
-    if (isCycle) {
+    let isCycle = dfsCycle(u, visited, callStack, graph);
+    if (!isCycle) {
       safeNodes.push(u);
     }
   }
 
   return safeNodes;
-  function dfsCycle(src, visited, stack, graph) {
+  function dfsCycle(src, visited, callStack, graph) {
     // Mark src as visited
     // And add it in callStack
     visited[src] = true;
@@ -37,12 +37,9 @@ var eventualSafeNodes = function (graph) {
     }
 
     // If code reaches here that means
-    // It's time to return thus remove the current node
+    // It's time to return thus remove the current node 
     // from callStack
     callStack[src] = false; // Backtracking
     return false;
   }
 };
-
-let graph = [[1, 2], [2, 3], [5], [0], [5], [], []];
-console.log(eventualSafeNodes(graph));

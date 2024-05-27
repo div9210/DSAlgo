@@ -1,3 +1,5 @@
+//User function Template for javascript
+
 /**
  * @param {string[]} dict
  * @param {number} N
@@ -6,57 +8,64 @@
  */
 class Solution {
   findOrder(dict, N, K) {
-    // Initialize adjacency list
-    let adjList = {};
+    // This is a classic topological ordering question
+    let adjList = {} // Unordered Map
 
-    // Initialize visited and topoStack
-    let visited = {};
-    let topoStack = [];
-
-    // Construct adjacency list and handle prefixes
     for (let i = 0; i < dict.length - 1; i++) {
       let currentWord = dict[i];
       let nextWord = dict[i + 1];
+
       for (let char of currentWord) {
         if (!adjList[char]) adjList[char] = new Set();
       }
-      // Find the first differing character between two consecutive words
-      // We need to iterate till both are valid
+
+      // Traverse on both the strings simultaneously
+      // till the index where they both are valid
       let minLength = Math.min(currentWord.length, nextWord.length);
-      for (let j = 0; j < minLength; j++) {
-        if (currentWord[j] !== nextWord[j]) {
-          // Add differing character pairs to adjacency list
-          adjList[currentWord[j]].add(nextWord[j]);
-          // No need to consider subsequent differing characters, so break
+      for (let it = 0; it < minLength; it++) {
+        // Find the first differential character
+        if (currentWord[it] != nextWord[it]) {
+          adjList[currentWord[it]].add(nextWord[it]);
+          // We need to find only the first differential character so we can stop here
           break;
         }
       }
     }
 
-    // Perform topological sort for all disconnected components
-    for (let char in adjList) {
-      if (!visited[char]) {
-        topoSort(char, adjList, visited);
+
+    // For every character in adjList - Run topoSort
+    let ordering = [];
+    let visited = {} // Unordered Map
+    let callStack = {};
+    for (let keyChar in adjList) {
+      if (!visited[keyChar]) {
+        let isCycle = dfsTopoSort(keyChar, adjList, visited);
+        if (isCycle) return [];
       }
     }
-    return topoStack.reverse().join("");
 
-    // Topological sorting function
-    function topoSort(src, adjList, visited) {
+    return ordering;
+
+
+    function dfsTopoSort(src, adjList, visited) {
+      // Mark src as visited
       visited[src] = true;
+      callStack[src] = true;
+
+      // Visit all the unvisited neighbors
       if (adjList[src]) {
         for (let nbr of Array.from(adjList[src])) {
           if (!visited[nbr]) {
-            topoSort(nbr, adjList, visited);
-          }
+            let checkCycleFurther = dfsTopoSort(nbr, adjList, visited);
+            if (checkCycleFurther) return true
+          } else if (visited[nbr] && callStack[nbr]) return true;
         }
       }
-      // At backtracking, add the current node to the stack
-      topoStack.push(src);
+
+      // Backtracking call
+      ordering.unshift(src);
+      callStack[src] = false;
+      return false;
     }
   }
 }
-
-let dict = ["baa", "abcd", "abca", "cab", "cad"];
-let sol = new Solution();
-console.log(sol.findOrder(dict, dict.length, 4));

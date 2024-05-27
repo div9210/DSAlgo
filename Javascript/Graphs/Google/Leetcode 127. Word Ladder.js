@@ -5,41 +5,58 @@
  * @return {number}
  */
 var ladderLength = function (beginWord, endWord, wordList) {
-  // Form a setList from wordList for presence checking in O(1)
-  let setWords = new Set(wordList);
-  if (!setWords.has(endWord)) return 0;
+  // Here the wordList is an Array, we will be needing a DS to search words in O(1)
+  let wordSet = new Set(wordList);
 
+  // We will use BFS to solve this problem
   let q = [];
-  // Intitial state
-  q.push([beginWord, 1]); // [word, level]
+  // Initial State
+  let prevLevel = -1;
+  q.push([[beginWord], 1]) // [[word], level]
 
-  let endWordAt = null;
+  let toBeDeletedWords = [];
+  let paths = [];
   while (q.length > 0) {
-    let pickedFront = q.shift();
-    let [word, level] = pickedFront;
+    let front = q.shift();
+    let [path, level] = front;
+    let word = path[path.length - 1];
+
     if (word == endWord) {
-      endWordAt = level;
+      paths.push(path);
     }
 
-    for (let pos = 0; pos < word.length; pos++) {
-      for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
-        let currentChar = String.fromCharCode(i);
-        // Replace the pos with current char i
-        // Only if they are not same
-        if (currentChar != word[pos]) {
-          let replacedStr =
-            word.substring(0, pos) + currentChar + word.substring(pos + 1);
-          if (setWords.has(replacedStr)) {
-            q.push([replacedStr, level + 1]);
-            // Remove the replaced string from setWords after the insertion
-            setWords.delete(replacedStr);
+    if (level != prevLevel) {
+      // That means prevLevel has been processed completely
+      while (toBeDeletedWords.length > 0) {
+        let w = toBeDeletedWords.shift();
+        wordSet.delete(w);
+      }
+      prevLevel = level;
+    }
+
+    // Change every position of the word with a-z characters
+    for (let i = 0; i < word.length; i++) {
+      let currentWordChar = word[i];
+      let A = "a".charCodeAt(0);
+      let Z = "z".charCodeAt(0);
+
+      for (let charCode = A; charCode <= Z; charCode++) {
+        if (currentWordChar != replacedChar) {
+          let replacedChar = String.fromCharCode(charCode);
+          let replacedWord = word.substring(0, i) + replacedChar + word.substring(i + 1);
+          if (wordSet.has(replacedWord)) {
+            let newPath = [...path].push(replacedWord);
+            q.push([newPath, level + 1]);
+            // But this replaced word can be reached by a different path as well for the same level
+            toBeDeletedWords.push(replacedWord);
           }
         }
+
       }
     }
   }
 
-  return endWordAt;
+  return paths;
 };
 
 let beginWord = "hit",

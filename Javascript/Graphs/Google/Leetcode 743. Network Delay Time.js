@@ -28,7 +28,7 @@ var networkDelayTime = function (times, n, k) {
     let pq = new HeapWithComparator((a, b) => a[1] - b[1]);
     pq.insert([src, 0]);
 
-    while (pq.size() > 0) {
+    while (!pq.isEmpty()) {
       let [node, distance] = pq.delete();
 
       if (distance > distances[node]) continue;
@@ -49,122 +49,97 @@ var networkDelayTime = function (times, n, k) {
 
     return distances;
   }
+
 };
 
-class PriorityQueueI {
-  constructor() {
-    this.queue = [];
-  }
-
-  enqueue(element) {
-    this.queue.push(element);
-    this.queue.sort((a, b) => a.distance - b.distance);
-  }
-
-  dequeue() {
-    if (this.isEmpty()) return null;
-    return this.queue.shift();
-  }
-
-  isEmpty() {
-    return this.queue.length === 0;
-  }
-}
-
 class HeapWithComparator {
-  constructor(cFn) {
+  constructor(cFnn) {
     this.elements = [];
-    this.comparatorFn = cFn;
-  }
-  heapifyUp(index) {
-    let currentIndex = index;
-    while (currentIndex > 0) {
-      const parentIndex = Math.floor((currentIndex - 1) / 2);
-      if (
-        this.comparatorFn(
-          this.elements[currentIndex],
-          this.elements[parentIndex]
-        ) < 0
-      ) {
-        this.swap(this.elements, currentIndex, parentIndex);
-        currentIndex = parentIndex;
-      } else {
-        break;
-      }
-    }
+    this.cFn = cFnn;
   }
   size() {
     return this.elements.length;
   }
-  swap(arr, i, j) {
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+  isEmpty() {
+    return this.elements.length == 0
   }
-  insert(val) {
-    // Push the val in the elements
-    this.elements.push(val);
-    // Heapify Up (Child To Parent)
-    this.heapifyUp(this.elements.length - 1);
+  swap(i, j) {
+    let temp = this.elements[i];
+    this.elements[i] = this.elements[j];
+    this.elements[j] = temp;
   }
 
-  delete() {
-    if (this.elements.length == 0) {
-      console.log("Underflow");
-      return null;
+  heapifyUp(index) {
+    let currentIndex = index;
+    while (currentIndex > 0) {
+      let parentIndex = Math.floor((currentIndex - 1) / 2);
+      if (this.cFn(this.elements[currentIndex], this.elements[parentIndex]) < 0) {
+        // Fails the sorting condition
+        // Thus swap
+        this.swap(currentIndex, parentIndex);
+        currentIndex = parentIndex; // Update currentIndex
+      } else {
+        // If true for sorting condition
+        // No need to heapify further
+        break;
+      }
     }
+  }
 
-    let root = this.elements[0];
-    // Now pick the safest node in the heap i.e rightMost
-    let safestNode = this.elements[this.elements.length - 1];
-    // Replace the root with safestNode and delete the safestNode
-    this.elements[0] = safestNode;
-    this.elements.pop();
-    // Heapify Down (Parent to Child)
-    let currentIndex = 0;
+  insert(val) {
+    // Insert the element directly
+    this.elements.push(val);
+    let valIndex = this.elements.length - 1;
+    // HeapifyUp the index
+    this.heapifyUp(valIndex);
+  }
+
+  heapifyDown(index) {
+    // The element at index has to pass the sorting condition
+    // among all its children
+    let currentIndex = index;
     let n = this.elements.length;
     while (currentIndex < n) {
       let leftChildIndex = 2 * currentIndex + 1;
       let rightChildIndex = 2 * currentIndex + 2;
-      let smallestIndex = currentIndex;
-      // If the comparatorFn for smallestIndex and leftChildIndex elements returns anything less than 0
-      // Then it is right but for the case of opposite i.e more than 0 we need to update smallestIndex
-      if (
-        leftChildIndex < n &&
-        this.comparatorFn(
-          this.elements[smallestIndex],
-          this.elements[leftChildIndex]
-        ) > 0
-      ) {
-        smallestIndex = leftChildIndex;
+
+      // Let us believe the currentIndex is the most right index
+      let correctIndex = currentIndex;
+      // Now check
+      if (leftChildIndex < n && this.cFn(this.elements[leftChildIndex], this.elements[correctIndex]) < 0) {
+        correctIndex = leftChildIndex;
       }
-      // If the comparatorFn for smallestIndex and rightChildIndex elements returns anything less than 0
-      // Then it is right but for the case of opposite i.e more than 0 we need to update smallestIndex
-      if (
-        rightChildIndex < n &&
-        this.comparatorFn(
-          this.elements[smallestIndex],
-          this.elements[rightChildIndex]
-        ) > 0
-      ) {
-        smallestIndex = rightChildIndex;
+
+      if (rightChildIndex < n && this.cFn(this.elements[rightChildIndex], this.elements[correctIndex]) < 0) {
+        correctIndex = rightChildIndex;
       }
-      if (smallestIndex != currentIndex) {
+
+      if (correctIndex != currentIndex) {
         // Swap
-        this.swap(this.elements, smallestIndex, currentIndex);
-        currentIndex = smallestIndex;
+        this.swap(currentIndex, correctIndex);
+        currentIndex = correctIndex; // Update currentIndex
       } else {
         break;
       }
     }
+  }
+
+  delete() {
+    if (this.elements.length == 0) return null;
+
+    // Delete the root 
+    let root = this.elements[0];
+    // Pick the safest node to replace root i.e last node
+    let safestNode = this.elements.pop();
+
+    this.elements[0] = safestNode;
+    // Perform heapify down on the 0th index
+    this.heapifyDown(0);
+
     return root;
   }
-
-  print() {
-    console.log("Heap :", this.elements);
-  }
-
-  peek() {
-    return this.elements[0];
-  }
 }
+
+
+let times = [[2, 1, 1], [2, 3, 1], [3, 4, 1]], n = 4, k = 2;
+console.log(networkDelayTime(times, n, k));

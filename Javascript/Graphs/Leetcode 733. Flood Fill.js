@@ -11,10 +11,10 @@ var floodFill = function (image, sr, sc, color) {
   let visited = Array(image.length)
     .fill()
     .map(() => Array(image[0].length).fill(false));
-  solve(image, sr, sc, color, startingColor, visited);
+  dfs(image, sr, sc, color, startingColor, visited);
   return image;
 
-  function solve(image, sr, sc, color, startingColor, visited) {
+  function dfs(image, sr, sc, color, startingColor, visited) {
     // Set the color of the current pixel
     image[sr][sc] = color;
     visited[sr][sc] = true;
@@ -31,7 +31,7 @@ var floodFill = function (image, sr, sc, color) {
         image[visitingX][visitingY] == startingColor &&
         visited[visitingX][visitingY] == false
       ) {
-        solve(image, visitingX, visitingY, color, startingColor, visited);
+        dfs(image, visitingX, visitingY, color, startingColor, visited);
       }
     }
   }
@@ -56,10 +56,10 @@ var floodFill = function (image, sr, sc, color) {
     [0, -1],
   ];
   // let visited = Array(image.length).fill().map(() => Array(image[0].length).fill(false));
-  solve(image, sr, sc, color, startingColor);
+  dfs(image, sr, sc, color, startingColor);
   return image;
 
-  function solve(image, sr, sc, color, startingColor) {
+  function dfs(image, sr, sc, color, startingColor) {
     // Set the color of the current pixel
     image[sr][sc] = color;
     // visited[sr][sc] = true;
@@ -74,9 +74,9 @@ var floodFill = function (image, sr, sc, color) {
       if (
         inBounds(visitingX, visitingY) &&
         image[visitingX][visitingY] ==
-          startingColor /*&& visited[visitingX][visitingY] == false*/
+        startingColor /*&& visited[visitingX][visitingY] == false*/
       ) {
-        solve(image, visitingX, visitingY, color, startingColor);
+        dfs(image, visitingX, visitingY, color, startingColor);
       }
     }
   }

@@ -62,3 +62,54 @@ var countSubIslands = function (grid1, grid2) {
     return x >= 0 && x < grid1.length && y >= 0 && y < grid1[0].length;
   }
 };
+
+
+/**
+ * @param {number[][]} grid1
+ * @param {number[][]} grid2
+ * @return {number}
+ */
+var countSubIslands = function (grid1, grid2) {
+  const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]; // UP RIGHT DOWN LEFT
+  let subIslands = [];
+
+  // Run dfs to find islands on grid 2 with conditions that it should be a valid land in grid 1 as well
+  for (let i = 0; i < grid2.length; i++) {
+    for (let j = 0; j < grid2[i].length; j++) {
+      if (grid2[i][j] == 1 && grid1[i][j] == 1) {
+        // A land
+        let island = [];
+        let isValidIsland = dfs(i, j, island);
+        if (isValidIsland) {
+          subIslands.push(island);
+        }
+      }
+    }
+  }
+
+  return subIslands.length;
+
+  function dfs(srcx, srcy, island) {
+    // Mark src as visited
+    // No need to use additional visited
+    // We can turn land back to water to mark it visited
+    grid2[srcx][srcy] = 0;
+    island.push([srcx, srcy]);
+
+    let validIsland = true; // Flag to track if all coordinates belong to grid1
+    // Visit all the reachable directions
+    for (let [dx, dy] of directions) {
+      let newx = srcx + dx;
+      let newy = srcy + dy;
+      if (inBound(newx, newy) && grid2[newx][newy] == 1) {
+        let isWholeDfsIslandValid = dfs(newx, newy, island);
+        validIsland = validIsland && isWholeDfsIslandValid;
+      }
+    }
+    return validIsland && grid1[srcx][srcy] == 1; // Check if current coordinate is in grid1
+  }
+
+  function inBound(x, y) {
+    return x >= 0 && x < grid1.length && y >= 0 && y < grid1[0].length;
+  }
+};

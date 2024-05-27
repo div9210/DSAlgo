@@ -33,7 +33,8 @@ var longestIncreasingPath = function (matrix) {
       const newX = x + dx;
       const newY = y + dy;
       if (inBound(newX, newY) && matrix[newX][newY] > matrix[x][y]) {
-        max = Math.max(max, 1 + dfs(newX, newY));
+        let path = 1 + dfs(newX, newY);
+        max = Math.max(max, path);
       }
     }
     dp[x][y] = max;

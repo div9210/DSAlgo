@@ -11,22 +11,31 @@
  * @return {Node}
  */
 var cloneGraph = function (node) {
+    // Whenever I create a clone of a node
+    // I need to have the access of that cloned node
+    // So that i don't create it multiple times
     if (node == null) return null;
+    let map = new Map(); // oldNode -> newNode
 
-    let nodeMap = new Map();
-    return dfs(node, nodeMap);
-}
+    return cloneTheNode(node, map);
 
-function dfs(node, nodeMap) {
-    if (nodeMap.has(node)) return nodeMap.get(node);
+    function cloneTheNode(node) {
+        // Create a new node
+        let newNode = new Node(node.val);
+        map.set(node, newNode);
 
-    const cloneNode = new Node(node.val);
-    nodeMap.set(node, cloneNode);
+        // Set the neighbors for this newNode by copying the neighbors of node
+        for (let nbr of node.neighbors) {
+            // If already cloned
+            if (map.has(nbr)) {
+                let clonedNode = map.get(nbr);
+                newNode.neighbors.push(clonedNode);
+            } else {
+                // Create the clonedNode and push it in newNode neighbors
+                newNode.neighbors.push(cloneTheNode(nbr));
+            }
+        }
 
-    for (const neighbor of node.neighbors) {
-        const cloneNeighbor = dfs(neighbor, nodeMap);
-        cloneNode.neighbors.push(cloneNeighbor);
+        return newNode;
     }
-
-    return cloneNode;
 }

@@ -13,13 +13,12 @@ var findItinerary = function (tickets) {
 
   let adjList = {};
   for (let ticket of tickets) {
-    let src = ticket[0];
-    let dest = ticket[1];
+    let [src, dest] = ticket;
 
-    // Make an edge from src to dest
     if (!adjList[src]) adjList[src] = [];
     adjList[src].push(dest);
   }
+  
   let result = [];
   dfs("JFK");
   return result;

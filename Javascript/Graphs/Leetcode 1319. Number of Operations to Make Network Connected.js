@@ -48,3 +48,51 @@ var makeConnected = function (n, connections) {
     }
   }
 };
+
+// DSU - Approach
+
+var makeConnected = function (n, connections) {
+  let ds = new DSU(n);
+  for (let conn of connections) {
+    let [u, v] = conn;
+    ds.union(u, v);
+  }
+
+  let components = 0
+  for (let node = 0; node < n; node++) {
+    if (ds.findRootParent(node) == node) components++;
+  }
+
+  if (connections.length < n - 1) return -1;
+
+  let cablesNeeded = components - 1;
+  return cablesNeeded;
+}
+
+class DSU {
+  constructor(n) {
+    this.size = new Array(n).fill(1);
+    this.parent = new Array(n).fill().map((e, i) => i);
+  }
+
+  findRootParent(node) {
+    if (this.parent[node] == node) return node;
+
+    return this.parent[node] = this.findRootParent(this.parent[node]);
+  }
+
+  union(u, v) {
+    let uParent = this.findRootParent(u);
+    let vParent = this.findRootParent(v);
+
+    if (uParent != vParent) {
+      if (this.size[uParent] > this.size[vParent]) {
+        this.parent[vParent] = uParent;
+        this.size[uParent] += this.size[vParent];
+      } else {
+        this.parent[uParent] = vParent;
+        this.size[vParent] += this.size[uParent];
+      }
+    }
+  }
+}
