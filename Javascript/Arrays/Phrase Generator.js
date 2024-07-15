@@ -4,10 +4,13 @@ function phraseGen(s) {
 
     let phrase = "";
     let result = [];
+
+    // O(n) * O(logn)
     while (index < s.length) {
-        phrase += s[index];
+        phrase += s[index]; // String + String Builder + copy elements + reference obj new
 
         // If not already seen
+        // O(logn)
         if (!set.has(phrase)) {
             result.push(phrase);
             set.add(phrase);
@@ -17,6 +20,7 @@ function phraseGen(s) {
         index++;
     }
 
+    // The line where i got one hint
     if (phrase.length > 0) result.push(phrase);
 
     return result;
