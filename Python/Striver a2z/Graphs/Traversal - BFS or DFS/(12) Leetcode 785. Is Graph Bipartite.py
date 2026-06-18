@@ -2,6 +2,25 @@ class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
         nodeColor = [-1] * n
+        def bfs(node, color):
+            q = deque()
+            q.append(node)
+            nodeColor[node] = color
+
+            while q:
+                n = q.popleft()
+                c = nodeColor[n]
+
+                for nbr in graph[n]:
+                    if nodeColor[nbr] == -1:
+                        q.append(nbr)
+                        diffColor = 1 if c == 0 else 0
+                        nodeColor[nbr] = diffColor
+                    else:
+                        # nbr is already colored
+                        if nodeColor[nbr] == c: return False
+            
+            return True
 
         def dfs(node, color):
             # Color the node
@@ -29,7 +48,7 @@ class Solution:
         for node in range(n):
             if nodeColor[node] == -1:
                 # Not colored yet
-                isGraphBipartite = isGraphBipartite and dfs(node, 0)
+                isGraphBipartite = isGraphBipartite and bfs(node, 0)
             
         
         return isGraphBipartite
